@@ -1,5 +1,4 @@
 class MapquestService < BaseService
-
   @url = "http://mapquestapi.com/geocoding/v1/"
 
   def self.get_location(city_state)
