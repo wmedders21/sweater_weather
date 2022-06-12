@@ -1,8 +1,8 @@
 class BaseService
 
-  def self.conn(url, key)
+  def self.conn(url, keyname, key)
     Faraday.new(url: url) do |faraday|
-      faraday.params['key'] = key
+      faraday.params[keyname] = key
     end
   end
 

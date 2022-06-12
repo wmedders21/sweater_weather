@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe MapquestService do
+RSpec.describe MapquestService, :vcr do
   describe 'class methods' do
     it '#get_location' do
       city_state = 'denver,co'

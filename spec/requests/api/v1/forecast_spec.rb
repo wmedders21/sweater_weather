@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'forecast endpoint' do
+RSpec.describe 'forecast endpoint', :vcr do
   before :each do
     get '/api/v1/forecast?location=denver,co'
     @response_body = JSON.parse(response.body, symbolize_names: true)
@@ -11,7 +11,7 @@ RSpec.describe 'forecast endpoint' do
     expect(@response_body[:data]).to be_a(Hash)
   end
 
-  it 'data has id, type, and attributes' do
+  it 'data has id, type, and attributes', :vcr do
 
     data = response_body[:data]
 

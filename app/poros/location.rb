@@ -1,7 +1,7 @@
 class Location
-  attr_reader :lat, :lng
+  attr_reader :lat, :lon
   def initialize(coords)
     @lat = coords[:lat]
-    @lng = coords[:lng]
+    @lon = coords[:lng]
   end
 end
