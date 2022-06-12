@@ -27,4 +27,4 @@
 
 /coverage
 
-/fixtures/vcr_cassettes
+/spec/fixtures/vcr_cassettes
