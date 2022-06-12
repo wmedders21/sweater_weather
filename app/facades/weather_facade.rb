@@ -30,6 +30,6 @@ class WeatherFacade
     forecast[:daily_weather] = daily_array.map { |daily_stats| DailyWeather.new(daily_stats) }
     hourly_array = response[:hourly].take(8)
     forecast[:hourly_weather] = hourly_array.map { |hourly_stats| HourlyWeather.new(hourly_stats) }
-    forecast
+    Forecast.new(forecast)
   end
 end
