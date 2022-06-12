@@ -1,18 +1,16 @@
-class Background
-  attr_reader :id, :type, :attributes
+class Image
+  attr_reader :id, :type, :image, :credit
   def initialize(data)
     @id = 'null'
     @type = 'image'
-    @attributes = {
-      image: {
+    @image = {
         name: data[:name],
         image_url: data[:contentUrl]
-      },
-      credit: {
+      }
+    @credit = {
         source: data[:hostPageUrl],
         author: data[:hostPageDomainFriendlyName],
         logo: data[:hostPageFavIconUrl]
       }
-    }
   end
 end
