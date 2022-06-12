@@ -40,15 +40,15 @@ RSpec.describe DailyWeather do
       :uvi=>10.66
     }
 
-    cw = DailyWeather.new(attributes)
+    dw = DailyWeather.new(attributes)
 
-    expect(cw).to be_a(DailyWeather)
-    expect(cw.date).to eq('2022-06-11')
-    expect(cw.sunrise).to eq('2022-06-11 07:31:35 -0400')
-    expect(cw.sunset).to eq('2022-06-11 22:27:50 -0400')
-    expect(cw.max_temp).to eq(97.74)
-    expect(cw.min_temp).to eq(69.33)
-    expect(cw.conditions).to eq('clear sky')
-    expect(cw.icon).to eq('01d')
+    expect(dw).to be_a(DailyWeather)
+    expect(dw.date).to eq('2022-06-11')
+    expect(dw.sunrise).to eq('2022-06-11 07:31:35 -0400')
+    expect(dw.sunset).to eq('2022-06-11 22:27:50 -0400')
+    expect(dw.max_temp).to eq(97.74)
+    expect(dw.min_temp).to eq(69.33)
+    expect(dw.conditions).to eq('clear sky')
+    expect(dw.icon).to eq('01d')
   end
 end
