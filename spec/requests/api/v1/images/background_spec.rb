@@ -32,18 +32,19 @@ RSpec.describe 'backgrounds endpoint', :vcr do
 
   it 'attributes', :vcr do
     attributes = @response_body[:data][:attributes]
-    expect(attributes.keys).to eq([:image, :credit])
+    expect(attributes.keys).to eq([:image])
   end
 
   it 'image attribute', :vcr do
     image = @response_body[:data][:attributes][:image]
-    expect(image.keys).to eq([:name, :image_url])
+    expect(image.keys).to eq([:name, :image_url, :credit])
     expect(image[:name]).to be_a(String)
     expect(image[:image_url]).to be_a(String)
+    expect(image[:credit]).to be_a(Hash)
   end
 
-  it 'credit attribute', :vcr do
-    credit = @response_body[:data][:attributes][:credit]
+  it 'image attribute credit hash', :vcr do
+    credit = @response_body[:data][:attributes][:image][:credit]
     expect(credit.keys).to eq([:source, :author, :logo])
     expect(credit[:source]).to be_a(String)
     expect(credit[:author]).to be_a(String)
