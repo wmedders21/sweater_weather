@@ -8,6 +8,7 @@ class BingImageService < BaseService
   end
 
   def self.get_background(search_term)
-    get_json(conn(@url, 'Ocp-Apim-Subscription-Key', ENV['bing_images_key']).get("?q=#{search_term}&count=1&mkt=en-us&safeSearch=Strict"))
+    get_json(conn(@url, 'Ocp-Apim-Subscription-Key', ENV['bing_images_key'])
+    .get("?q=#{search_term}&count=1&mkt=en-us&safeSearch=Strict"))
   end
 end
