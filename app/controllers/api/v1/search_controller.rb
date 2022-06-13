@@ -14,7 +14,7 @@ class Api::V1::SearchController < ApplicationController
 
   def check_quantity
     if params[:quantity].to_i < 1
-      render json: { error: "Quantity can't be less than 1"}, status:400
+      render json: { error: "Quantity must be 1 or more"}, status:400
     end
   end
 end

@@ -1,12 +1,12 @@
 require 'rails_helper'
 
-RSpec.describe 'book-search endpoint', :vcr do
+RSpec.describe 'book-search endpoint' do
   describe 'happy path' do
-    before :each do
+    before :each, :vcr do
       get '/api/v1/book-search?location=denver,co&quantity=5'
       @response_body = JSON.parse(response.body, symbolize_names: true)
     end
-    it 'returns data with id, type and attributes' do
+    it 'returns data with id, type and attributes', :vcr do
       expect(response.status).to eq(200)
       expect(@response_body.keys).to eq([:data])
       expect(@response_body[:data]).to be_a(Hash)
@@ -16,7 +16,7 @@ RSpec.describe 'book-search endpoint', :vcr do
       expect(@response_body[:data][:attributes]).to be_a(Hash)
     end
 
-    it 'contains attributes destination, forecast, total_books_found, and books' do
+    it 'contains attributes destination, forecast, total_books_found, and books', :vcr do
       attributes = @response_body[:data][:attributes]
 
       expect(attributes.keys.count).to eq(4)
@@ -31,7 +31,7 @@ RSpec.describe 'book-search endpoint', :vcr do
       expect(attributes[:books].count).to eq(5)
     end
 
-    it 'returns a list of books' do
+    it 'returns a list of books', :vcr do
       books = @response_body[:data][:attributes][:books]
 
       books.each do |book|
@@ -42,12 +42,13 @@ RSpec.describe 'book-search endpoint', :vcr do
       end
     end
     describe 'sad path' do
-      it 'returns an error message, sad path quantity 0' do
+      it 'returns an error message, sad path quantity 0', :vcr do
         get '/api/v1/book-search?location=denver,co&quantity=0'
         response_body = JSON.parse(response.body, symbolize_names: true)
 
         expect(response.status).to eq(400)
         expect(response_body).to have_key(:error)
+        expect(response_body[:error]).to eq("Quantity must be 1 or more")
       end
     end
   end
