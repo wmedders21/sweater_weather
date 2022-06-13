@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-Rspec.describe 'book-search endpoint', :vcr do
+RSpec.describe 'book-search endpoint' do
   before :each do
-    get 'api/v1/book-search?location=denver,co&quantity=5'
+    get '/api/v1/book-search?location=denver,co&quantity=5'
     @response_body = JSON.parse(response.body, symbolize_names: true)
   end
   it 'returns data with id, type and attributes' do
@@ -39,5 +39,5 @@ Rspec.describe 'book-search endpoint', :vcr do
       expect(book[:title]).to be_a(String)
       expect(book[:publisher]).to be_a(Array)
     end
-  end      
+  end
 end

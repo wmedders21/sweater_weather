@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       resources :forecast, only: [:index]
       get '/backgrounds', to: 'images#background'
       post 'users', to: 'users#create'
+      get 'book-search', to: 'search#books'
     end
   end
 end
