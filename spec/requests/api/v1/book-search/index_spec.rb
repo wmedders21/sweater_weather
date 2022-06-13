@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'book-search endpoint' do
+RSpec.describe 'book-search endpoint', :vcr do
   before :each do
     get '/api/v1/book-search?location=denver,co&quantity=5'
     @response_body = JSON.parse(response.body, symbolize_names: true)
