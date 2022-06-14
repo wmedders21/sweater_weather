@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.describe 'session endpoint' do
   describe 'happy path' do
     it 'returns data hash with type, id, and attributes' do
-      body = { email: "test@test.com"}, password: "password"}
+      User.create(email: "test@test.com", password: "password", api_key: SecureRandom.hex)
+      body = { email: "test@test.com", password: "password"}
       headers = {"CONTENT_TYPE" => "application/json"}
 
       post '/api/v1/sessions', headers: headers, params: JSON.generate(body)
