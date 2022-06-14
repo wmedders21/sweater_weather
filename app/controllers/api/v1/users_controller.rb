@@ -3,8 +3,8 @@ class Api::V1::UsersController < ApplicationController
 
   def create
     new_user = User.new(user_params)
+    new_user[:api_key] = SecureRandom.hex
     if new_user.save
-      new_user.update(api_key: SecureRandom.hex)
       render json: UserSerializer.new(new_user), status: 201
     else
       render json: { error: 'Email entered is unavailable'}, status: 401
