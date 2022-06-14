@@ -23,9 +23,11 @@ RSpec.describe 'session endpoint' do
   end
 
   describe 'sad paths' do
-    it 'wrong pw returns an error message' do
+    before :each do
       User.create(email: "test@test.com", password: "password", api_key: SecureRandom.hex)
-
+    end
+    
+    it 'wrong pw returns an error message' do
       body = { email: "test@test.com", password: "wrongpassword"}
       headers = {"CONTENT_TYPE" => "application/json"}
 
@@ -37,7 +39,7 @@ RSpec.describe 'session endpoint' do
       expect(response_body[:error]).to eq('Invalid credentials')
     end
 
-    it 'empty field returns an error message' do
+    xit 'empty field returns an error message' do
       body = { email: "", password: "password" }
       headers = {"CONTENT_TYPE" => "application/json"}
 
@@ -49,7 +51,7 @@ RSpec.describe 'session endpoint' do
       expect(response_body[:error]).to eq('Missing Field')
     end
 
-    it 'empty pw field returns an error message' do
+    xit 'empty pw field returns an error message' do
       body = { email: "test@test.com", password: "" }
       headers = {"CONTENT_TYPE" => "application/json"}
 
