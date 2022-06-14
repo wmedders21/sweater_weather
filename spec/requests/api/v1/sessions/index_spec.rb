@@ -51,7 +51,7 @@ RSpec.describe 'session endpoint' do
       expect(response_body[:error]).to eq('Missing Field')
     end
 
-    xit 'empty pw field returns an error message' do
+    it 'empty pw field returns an error message' do
       body = { email: "test@test.com", password: "" }
       headers = {"CONTENT_TYPE" => "application/json"}
 

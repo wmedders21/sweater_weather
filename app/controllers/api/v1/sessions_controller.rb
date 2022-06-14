@@ -1,5 +1,5 @@
 class Api::V1::SessionsController < ApplicationController
-  before_action :check_email
+  before_action :check_fields
 
   def index
     user = User.find_by(email: session_params[:email]).authenticate(session_params[:password])
@@ -16,8 +16,8 @@ class Api::V1::SessionsController < ApplicationController
     params.permit(:email, :password)
   end
 
-  def check_email
-    if session_params[:email] == ""
+  def check_fields
+    if session_params[:email] == "" || session_params[:password] == ""
       render json: { error: "Missing Field"}, status: 401
     end
   end
