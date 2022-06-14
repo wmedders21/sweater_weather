@@ -38,7 +38,7 @@ RSpec.describe 'request to create a new user' do
     end
 
     it 'email already exists returns an error message' do
-      User.create(email: "whatever@example.com", password: "12345", password_confirmation: "12345")
+      User.create(email: "whatever@example.com", password: "12345", api_key: 12345)
       body = JSON.parse(File.read('./spec/fixtures/login_credentials.json'), symbolize_names: true)
       headers = {"CONTENT_TYPE" => "application/json"}
 
