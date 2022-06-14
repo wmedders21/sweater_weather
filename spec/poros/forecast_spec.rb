@@ -82,8 +82,8 @@ RSpec.describe Forecast do
       :pop=>0
     }
     current = CurrentWeather.new(ca)
-    daily = DailyWeather.new(da)
-    hourly = HourlyWeather.new(ha)
+    daily = [DailyWeather.new(da), DailyWeather.new(da), DailyWeather.new(da), DailyWeather.new(da), DailyWeather.new(da)]
+    hourly = [HourlyWeather.new(ha), HourlyWeather.new(ha), HourlyWeather.new(ha), HourlyWeather.new(ha), HourlyWeather.new(ha), HourlyWeather.new(ha), HourlyWeather.new(ha), HourlyWeather.new(ha)]
     forecast = Forecast.new({ current_weather: current,
                               daily_weather: daily,
                               hourly_weather: hourly
@@ -93,7 +93,11 @@ RSpec.describe Forecast do
     expect(forecast.id).to eq('null')
     expect(forecast.type).to eq('forecast')
     expect(forecast.current_weather).to be_a(CurrentWeather)
-    expect(forecast.daily_weather).to be_a(DailyWeather)
-    expect(forecast.hourly_weather).to be_a(HourlyWeather)
+    forecast.daily_weather.each do |df|
+      expect(df).to be_a(DailyWeather)
+    end
+    forecast.hourly_weather.each do |hf|
+      expect(hf).to be_a(HourlyWeather)
+    end
   end
 end
