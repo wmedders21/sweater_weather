@@ -72,5 +72,16 @@ RSpec.describe 'road_trip endpoint' do
       expect(response.status).to eq(401)
       expect(response_body[:error]).to eq("Invalid Key")
     end
+
+    it 'sad path no origin' do
+      body = { destination: "Pueblo, CO", api_key: "#{@user.api_key}" }
+      headers = {"CONTENT_TYPE" => "application/json"}
+
+      post '/api/v1/road_trip', headers: headers, params: JSON.generate(body)
+      response_body = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response.status).to eq(401)
+      expect(response_body[:error]).to eq("Missing Field")
+    end
   end
 end
