@@ -50,5 +50,16 @@ RSpec.describe 'road_trip endpoint' do
       expect(response_body[:data][:attributes][:travel_time]).to eq('impossible')
       expect(response_body[:data][:attributes][:weather_at_eta]).to eq({})
     end
+
+    it 'sad path wrong api key' do
+      body = { origin: "Denver, CO", destination: "Pueblo, CO", api_key: "09876" }
+      headers = {"CONTENT_TYPE" => "application/json"}
+
+      post '/api/v1/road_trip', headers: headers, params: JSON.generate(body)
+      response_body = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response.status).to eq(401)
+      expect(response_body[:error]).to eq("Invalid Key")
+    end
   end
 end
