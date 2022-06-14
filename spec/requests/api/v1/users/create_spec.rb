@@ -61,5 +61,17 @@ RSpec.describe 'request to create a new user' do
       expect(response_body).to have_key(:error)
       expect(response_body[:error]).to eq('Missing Field')
     end
+
+    it 'empty field returns an error message' do
+      body = { email: "test@test.com", password: "", password_confirmation: ""}
+      headers = {"CONTENT_TYPE" => "application/json"}
+
+      post '/api/v1/users', headers: headers, params: JSON.generate(body)
+      response_body = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response.status).to eq(401)
+      expect(response_body).to have_key(:error)
+      expect(response_body[:error]).to eq('Missing Field')
+    end
   end
 end

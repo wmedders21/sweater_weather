@@ -22,7 +22,7 @@ class Api::V1::UsersController < ApplicationController
       render json: { error: "Password does not match password confirmation" }, status: 401
     elsif
       user_params[:password] == "" || user_params[:password_confirmation] == ""
-      render json: { error: "Missing a password field" }, status: 401
+      render json: { error: "Missing Field" }, status: 401
     end
   end
 
@@ -30,5 +30,5 @@ class Api::V1::UsersController < ApplicationController
     if user_params[:email] == ""
       render json: { error: 'Missing Field'}, status: 401
     end
-  end      
+  end
 end
