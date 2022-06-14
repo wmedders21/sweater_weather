@@ -1,6 +1,7 @@
 class WeatherFacade
 
   def self.get_forecast(location)
+    binding.pry
     response = OpenWeatherService.get_forecast(location)
     forecast = {}
     forecast[:current_weather] = CurrentWeather.new(response[:current])
