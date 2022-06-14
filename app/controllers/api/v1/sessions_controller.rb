@@ -2,9 +2,14 @@ class Api::V1::SessionsController < ApplicationController
   before_action :check_fields
 
   def index
-    user = User.find_by(email: session_params[:email]).authenticate(session_params[:password])
-    if user
-      render json: UserSerializer.new(user)
+    found_user = User.find_by(email: session_params[:email])
+    if found_user
+      user = found_user.authenticate(session_params[:password])
+      if user
+        render json: UserSerializer.new(user)
+      else
+        render json: { error: 'Invalid credentials'}, status: 401
+      end
     else
       render json: { error: 'Invalid credentials'}, status: 401
     end

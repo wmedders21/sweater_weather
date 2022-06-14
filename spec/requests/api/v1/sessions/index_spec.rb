@@ -62,5 +62,17 @@ RSpec.describe 'session endpoint' do
       expect(response_body).to have_key(:error)
       expect(response_body[:error]).to eq('Missing Field')
     end
+
+    it 'no user found returns an error message' do
+      body = { email: "sample@sample.com", password: "password" }
+      headers = {"CONTENT_TYPE" => "application/json"}
+
+      post '/api/v1/sessions', headers: headers, params: JSON.generate(body)
+      response_body = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response.status).to eq(401)
+      expect(response_body).to have_key(:error)
+      expect(response_body[:error]).to eq('Invalid credentials')
+    end
   end
 end
