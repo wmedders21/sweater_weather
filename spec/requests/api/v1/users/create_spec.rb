@@ -34,6 +34,20 @@ RSpec.describe 'request to create a new user' do
 
       expect(response.status).to eq(401)
       expect(response_body).to have_key(:error)
+      expect(response_body[:error]).to eq('Password does not match password confirmation')
+    end
+
+    it 'email already exists returns an error message' do
+      User.create(email: "whatever@example.com", password: "12345", password_confirmation: "12345")
+      body = JSON.parse(File.read('./spec/fixtures/login_credentials.json'), symbolize_names: true)
+      headers = {"CONTENT_TYPE" => "application/json"}
+
+      post '/api/v1/users', headers: headers, params: JSON.generate(body)
+      response_body = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response.status).to eq(401)
+      expect(response_body).to have_key(:error)
+      expect(response_body[:error]).to eq('Email entered is unavailable')
     end
   end
 end
