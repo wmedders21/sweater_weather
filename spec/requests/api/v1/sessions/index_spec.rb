@@ -21,4 +21,44 @@ RSpec.describe 'session endpoint' do
       expect(response_body[:data][:attributes][:api_key]).to be_a(String)
     end
   end
+
+  describe 'sad paths' do
+    it 'wrong pw returns an error message' do
+      User.create(email: "test@test.com", password: "password", api_key: SecureRandom.hex)
+
+      body = { email: "test@test.com", password: "wrongpassword"}
+      headers = {"CONTENT_TYPE" => "application/json"}
+
+      post '/api/v1/sessions', headers: headers, params: JSON.generate(body)
+      response_body = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response.status).to eq(401)
+      expect(response_body).to have_key(:error)
+      expect(response_body[:error]).to eq('Invalid credentials')
+    end
+
+    it 'empty field returns an error message' do
+      body = { email: "", password: "password" }
+      headers = {"CONTENT_TYPE" => "application/json"}
+
+      post '/api/v1/sessions', headers: headers, params: JSON.generate(body)
+      response_body = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response.status).to eq(401)
+      expect(response_body).to have_key(:error)
+      expect(response_body[:error]).to eq('Missing Field')
+    end
+
+    it 'empty pw field returns an error message' do
+      body = { email: "test@test.com", password: "" }
+      headers = {"CONTENT_TYPE" => "application/json"}
+
+      post '/api/v1/sessions', headers: headers, params: JSON.generate(body)
+      response_body = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response.status).to eq(401)
+      expect(response_body).to have_key(:error)
+      expect(response_body[:error]).to eq('Missing Field')
+    end
+  end
 end
