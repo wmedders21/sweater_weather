@@ -1,5 +1,5 @@
 class Api::V1::UsersController < ApplicationController
-  before_action :check_passwords
+  before_action :check_passwords, :check_email
 
   def create
     new_user = User.new(user_params)
@@ -25,4 +25,10 @@ class Api::V1::UsersController < ApplicationController
       render json: { error: "Missing a password field" }, status: 401
     end
   end
+
+  def check_email
+    if user_params[:email] == ""
+      render json: { error: 'Missing Field'}, status: 401
+    end
+  end      
 end
