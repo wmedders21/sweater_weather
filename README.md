@@ -23,11 +23,11 @@ Features:
  - Find a relevant background image for a location
  - Plan a road trip between two locations. Receive estimated travel time and a weather report for the destination based on ETA.
 
-The external services consumed are: 
- - OpenWeather One Call API
- - MapQuest Geocoding API
- - MapQuest Directions API
- - Microsoft Bing Image Search API  
+The external services consumed are:
+ - [OpenWeather One Call API](https://openweathermap.org/api/one-call-api)
+ - [MapQuest Geocoding API](https://developer.mapquest.com/documentation/geocoding-api) 
+ - [MapQuest Directions API](https://developer.mapquest.com/documentation/directions-api)
+ - [Microsoft Bing Image Search](https://www.microsoft.com/en-us/bing/apis/bing-image-search-api)
 
 ## Database Schema
 
@@ -194,8 +194,11 @@ body: {
 
 ### API
 [OpenWeather One Call API](https://openweathermap.org/api/one-call-api) follow instructions to get API key for v2.5.
+
 [MapQuest Geocoding API](https://developer.mapquest.com/documentation/geocoding-api) follow instructions to get API key.
+
 [MapQuest Directions API](https://developer.mapquest.com/documentation/directions-api) you only need the one key for MapQuest.
+
 [Microsoft Bing Image Search](portal.azure.com) You need to set up a API key for Bing through Azure.
 
 
@@ -216,7 +219,7 @@ $ bundle install
 3. Database Migration<br>
 - Before using the web application you will need to setup your databases locally by running the following command
 ```shell
-$ rails db:{drop,create,migrate,seed}
+$ rails db:{drop,create,migrate}
 ```
 4. Setup Figaro
 ```shell
@@ -233,7 +236,7 @@ bing_images_key: <your azure key here>
 ```
 
 5. Startup and Access<br>
-- Finally, in order to use the web app you will have to start the server locally and access the app through a web browser.
+- Start the server locally.
 
 - Start server
 ```shell
