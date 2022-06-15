@@ -240,4 +240,4 @@ bing_images_key: <your azure key here>
 $ rails s
 ```
 
-- Open Postman and make requests to http://localhost:3000/api/v1
+- Open Postman and [import this collection](https://github.com/wmedders21/sweater_weather/blob/main/Sweater%20Weather.postman_collection.json) to get started.
