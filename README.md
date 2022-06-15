@@ -14,9 +14,9 @@
 
 **Sweater Weather API** consumes external API services and exposes endpoints for a weather application frontend. 
 
-This Rails Api application is the final solo project during MOD 3 at [Turing School of Software and Design](https://www.turing.edu)
+This Rails Api is the final solo project during MOD 3 at [Turing School of Software and Design](https://www.turing.edu)
 
-Implemented features include:
+Features:
  - Basic authentication for user registration and login.
  - Issuing a required API key upon registration.
  - Search current, 5 day, and next 8 hours weather forecasts for a location in one call.
