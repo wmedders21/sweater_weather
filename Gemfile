@@ -15,6 +15,8 @@ gem 'faraday'
 group :development, :test do
   gem 'pry'
   gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
+  gem 'vcr'
+  gem 'webmock'
 end
 
 group :test do
@@ -23,8 +25,6 @@ group :test do
   gem 'shoulda-matchers'
   gem 'factory_bot_rails'
   gem 'capybara'
-  gem 'vcr'
-  gem 'webmock'
 end
 
 group :development do
