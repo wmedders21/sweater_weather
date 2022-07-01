@@ -25,9 +25,7 @@ RSpec.describe HourlyWeather do
     }
 
     hw = HourlyWeather.new(attributes)
-
     expect(hw).to be_a(HourlyWeather)
-    expect(hw.time).to eq('19:00:00')
     expect(hw.temperature).to eq(95.97)
     expect(hw.conditions).to eq('broken clouds')
     expect(hw.icon).to eq('04d')
